@@ -4,3 +4,6 @@
 [submodule "foundry-zksync"]
 	path = foundry-zksync
 	url = https://github.com/matter-labs/foundry-zksync
+[submodule "foundry-simple-storage-f23/foundry-siple-storage-f23/foundry-zksync"]
+	path = foundry-simple-storage-f23/foundry-siple-storage-f23/foundry-zksync
+	url = https://github.com/matter-labs/foundry-zksync
