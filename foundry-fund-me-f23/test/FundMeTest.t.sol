@@ -23,7 +23,7 @@ contract FundMeTest is Test {
     function testOwnerIsSender() public {
         console.log("Owner address:", fundMe.i_owner());
         console.log("Msg.sender address:", msg.sender);
-        assertEq(fundMe.i_owner(), address(this));
+        assertEq(fundMe.i_owner(), msg.sender);
     }
 
     // Test fails because contract doeesn't get deployed

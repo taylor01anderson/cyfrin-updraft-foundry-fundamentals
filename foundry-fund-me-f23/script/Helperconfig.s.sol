@@ -21,11 +21,15 @@ contract HelperConfig is Script {
         if (block.chainid == 11155111) {
             activeNetworkConfig = getSepliaEthConfig();
         } else {
-            activeNetworkConfig = getAnvilEthConfig();
+            activeNetworkConfig = getOrCreateAnvilEthConfig();
         }
     }
 
-    function getAnvilEthConfig() {
+    function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
+        // If we have a price feed address, use it
+        if (activeNetworkConfig.priceFeed != address(0)) {
+            return activeNetworkConfig;
+        }
         vm.startBroadcast();
         MockV3Aggregator mockV3Aggregator = new MockV3Aggregator(DECIMALS, INITIAL_ANSWER);
         vm.stopBroadcast();
