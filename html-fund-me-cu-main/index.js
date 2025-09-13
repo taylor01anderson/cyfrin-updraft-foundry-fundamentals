@@ -80,6 +80,12 @@ async function getBalance() {
   }
 }
 
+// Testing fund() function
 // metamask hex to fund function: 0xb60d4288
 // cast sig fun() hex value: 0xb60d4288
-// They match
+// They match in metamask and terminal
+
+// Testing withdraw() function
+// metamask hex to withdraw function: 0x3ccfd60b
+// cast sig withdraw() hex value: \0x3ccfd60b
+// They match in metamask and terminal
