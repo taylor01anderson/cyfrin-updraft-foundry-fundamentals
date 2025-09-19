@@ -25,6 +25,7 @@ contract DevOpsToolsTest is Test, ZkSyncChainChecker, FoundryZkSyncChecker {
         assertEq(mostRecentDeployment, expectedAddress);
     }
 
+    /// forge-config: default.allow_internal_expect_revert = true
     function testExpectRevertIfNoRun() public onlyVanillaFoundry {
         string memory contractName = "FundMe";
         uint256 chainId = 9999;
@@ -32,10 +33,20 @@ contract DevOpsToolsTest is Test, ZkSyncChainChecker, FoundryZkSyncChecker {
         DevOpsTools.get_most_recent_deployment(contractName, chainId, SEARCH_PATH);
     }
 
+    /// forge-config: default.allow_internal_expect_revert = true
     function testExpectRevertIfNoDeployment() public skipZkSync onlyVanillaFoundry {
         string memory contractName = "MissingContract";
         uint256 chainId = 1234;
-        vm.expectRevert("No contract deployed");
+        vm.expectRevert(
+            bytes.concat(
+                "No contract named ",
+                "'",
+                bytes(contractName),
+                "'",
+                " has been deployed on chain ",
+                bytes(vm.toString(chainId))
+            )
+        );
         DevOpsTools.get_most_recent_deployment(contractName, chainId, SEARCH_PATH);
     }
 

@@ -6,7 +6,7 @@ It will look through your `broadcast` folder at your most recent deployment.
 
 ## Features
 - Get the most recent deployment of a contract in foundry
-- Checking if your on a zkSync based chain
+- Checking if you're on a zkSync based chain
 
 - [foundry-devops](#foundry-devops)
   - [Features](#features)
@@ -23,6 +23,9 @@ It will look through your `broadcast` folder at your most recent deployment.
 
 ## Requirements
 
+> [!IMPORTANT]  
+> As of `0.3.0`, nightly builds of foundry may not work as expected. Please use `foundryup -v stable` for the stable version of foundry.
+
 -   [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
     -   You'll know you did it right if you can run `git --version` and you see a response like `git version x.x.x`
 -   [foundry](https://getfoundry.sh/)
@@ -33,7 +36,7 @@ It will look through your `broadcast` folder at your most recent deployment.
 ## Installation
 
 ```bash
-forge install Cyfrin/foundry-devops --no-commit
+forge install Cyfrin/foundry-devops
 ```
 
 - Update forge-std to use newer FS cheatcodes
@@ -44,7 +47,7 @@ git rm -rf lib/forge-std
  rm -rf lib/forge-std
 ```
 ```
- forge install foundry-rs/forge-std@v1.8.2 --no-commit
+ forge install foundry-rs/forge-std@v1.8.2 
 ```
 
 ## Usage - Getting the most recent deployment
@@ -121,7 +124,7 @@ In your contract, you can import and inherit the abstract contract `FoundryZkSyn
 ```javascript
 import {FoundryZkSyncChecker} from "lib/foundry-devops/src/FoundryZkSyncChecker.sol";
 
-contract MyContract is FoundryZkSyncChainChecker {
+contract MyContract is FoundryZkSyncChecker {
 
   function doStuff() onlyFoundryZkSync {
 ```
