@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {LinkToken} from "../test/mocks/LinkToken.sol";
-import {Script, console2} from "forge-std/Script.sol";
-import {VRFCoordinatorV2_5Mock} from "../lib/chainlink-browniie-contracts/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
+import {Script} from "forge-std/Script.sol";
+import {VRFCoordinatorV2Mock} from "../lib/chainlink-brownie-contracts/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2Mock.sol";
 
 abstract contract CodeConstants {
     // VRF mock values
@@ -59,7 +58,7 @@ contract HelperConfig is CodeConstants, Script{
             gasLane: 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c,
             callbackGasLimit: 500000,
             subscriptionId: 0
-        })
+        });
     }
 
     function getOrCreateAnvilEthConfig() public returns(NetworkConfig memory) {
@@ -69,12 +68,10 @@ contract HelperConfig is CodeConstants, Script{
         }
 
         vm.startBroadcast();
-        VRFCoordinatorV2_5Mock vrfCoordinator = new VRFCoordinatorV2_5Mock(
+        VRFCoordinatorV2Mock vrfCoordinator = new VRFCoordinatorV2Mock(
             MOCK_BASE_FEE,
-            MOCK_GAS_PRICE_LINK,
-            MOCK_GAS_PRICE_LINK,
-            MOCK_WEI_PER_UNIT_LINK
-        )
+            MOCK_GAS_PRICE_LINK
+        );
         vm.stopBroadcast();
 
         localNetworkConfig = NetworkConfig({
